@@ -30,7 +30,7 @@ final class BlueprintsEnhancer {
     private BlueprintsEnhancer() {}
     
     static void enhance(MetaClass mc, BlueprintsProvider provider = DefaultBlueprintsProvider.instance) {
-        if(LOG.debugEnabled) LOG.debug("Enhancing $mc with $provider")
+        if (LOG.debugEnabled) LOG.debug("Enhancing $mc with $provider")
         mc.withBlueprints = {Closure closure ->
             provider.withBlueprints(DEFAULT, closure)
         }

@@ -18,13 +18,17 @@ import griffon.plugins.blueprints.BlueprintsConnector
 import griffon.plugins.blueprints.BlueprintsContributionHandler
 import griffon.plugins.blueprints.BlueprintsEnhancer
 
+import static griffon.util.ConfigUtils.getConfigValueAsBoolean
+
 /**
  * @author Andres Almiray
  */
 class BlueprintsGriffonAddon {
     void addonPostInit(GriffonApplication app) {
         ConfigObject config = BlueprintsConnector.instance.createConfig(app)
-        BlueprintsConnector.instance.connect(app, config)
+        if (getConfigValueAsBoolean(app.config, 'griffon.blueprints.connect.onstartup', true)) {
+            BlueprintsConnector.instance.connect(app, config)
+        }
         def types = app.config.griffon?.blueprints?.injectInto ?: ['controller']
         for (String type : types) {
             for (GriffonClass gc : app.artifactManager.getClassesOfType(type)) {

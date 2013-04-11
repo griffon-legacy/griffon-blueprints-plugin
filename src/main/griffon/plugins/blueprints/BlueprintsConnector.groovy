@@ -45,7 +45,12 @@ class BlueprintsConnector {
     }
 
     private ConfigObject narrowConfig(ConfigObject config, String graphName) {
-        return graphName == DEFAULT ? config.graph : config.graphs[graphName]
+        if (config.containsKey('graph') && graphName == DEFAULT) {
+            return config.graph
+        } else if (config.containsKey('graphs')) {
+            return config.graphs[graphName]
+        }
+        return config
     }
 
     Graph connect(GriffonApplication app, ConfigObject config, String graphName = DEFAULT) {

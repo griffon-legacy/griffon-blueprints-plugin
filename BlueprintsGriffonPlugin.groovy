@@ -19,7 +19,7 @@
  */
 class BlueprintsGriffonPlugin {
     // the plugin version
-    String version = '1.0.0'
+    String version = '1.1.0'
     // the version or versions of Griffon the plugin is designed for
     String griffonVersion = '1.2.0 > *'
     // the other plugins this plugin depends on
@@ -136,6 +136,26 @@ This block can be used inside the `environments()` block in the same way as the
 default graph block is used. The value of the `factory` key must be fully
 qualified classname of a class implementing `griffon.plugins.blueprints.factory.GraphFactory`.
 The default configuration instantiates a `com.tinkerpop.blueprints.impls.tg.TinkerGraph`.
+
+### Configuration Storage
+
+The plugin will load and store the contents of `BlueprintsConfig.groovy` inside the
+application's configuration, under the `pluginConfig` namespace. You may retrieve
+and/or update values using
+
+    app.config.pluginConfig.blueprints
+
+### Connect at Startup
+
+The plugin will attempt a connection to the default database at startup. If this
+behavior is not desired then specify the following configuration flag in
+`Config.groovy`
+
+    griffon.blueprints.connect.onstartup = false
+
+### Example
+
+A trivial sample application can be found at [https://github.com/aalmiray/griffon_sample_apps/tree/master/persistence/blueprints][2]
 
 Testing
 -------

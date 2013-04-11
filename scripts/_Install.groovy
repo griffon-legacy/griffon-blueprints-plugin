@@ -23,7 +23,7 @@ includeTargets << griffonScript("_GriffonCreateArtifacts")
 argsMap = argsMap ?: [:]
 argsMap.skipPackagePrompt = true
 
-if(!new File("${basedir}/griffon-app/conf/BlueprintsConfig.groovy").exists()) {
+if (!new File("${basedir}/griffon-app/conf/BlueprintsConfig.groovy").exists()) {
    createArtifact(
       name:   "BlueprintsConfig",
       suffix: "",
@@ -31,7 +31,7 @@ if(!new File("${basedir}/griffon-app/conf/BlueprintsConfig.groovy").exists()) {
       path:   "griffon-app/conf")
 }
 
-if(!new File("${basedir}/griffon-app/conf/BootstrapBlueprints.groovy").exists()) {
+if (!new File("${basedir}/griffon-app/conf/BootstrapBlueprints.groovy").exists()) {
    createArtifact(
       name:   "BootstrapBlueprints",
       suffix: "",

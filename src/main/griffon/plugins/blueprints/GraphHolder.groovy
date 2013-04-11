@@ -46,35 +46,35 @@ class GraphHolder {
     }
 
     Graph getGraph(String graphName = DEFAULT) {
-        if(isBlank(graphName)) graphName = DEFAULT
+        if (isBlank(graphName)) graphName = DEFAULT
         retrieveGraph(graphName)
     }
 
     void setGraph(String graphName = DEFAULT, Graph graph) {
-        if(isBlank(graphName)) graphName = DEFAULT
+        if (isBlank(graphName)) graphName = DEFAULT
         storeGraph(graphName, graph)
     }
 
     boolean isGraphConnected(String graphName) {
-        if(isBlank(graphName)) graphName = DEFAULT
+        if (isBlank(graphName)) graphName = DEFAULT
         retrieveGraph(graphName) != null
     }
 
     void disconnectGraph(String graphName) {
-        if(isBlank(graphName)) graphName = DEFAULT
+        if (isBlank(graphName)) graphName = DEFAULT
         storeGraph(graphName, null)
     }
 
     Graph fetchGraph(String graphName) {
-        if(isBlank(graphName)) graphName = DEFAULT
+        if (isBlank(graphName)) graphName = DEFAULT
         Graph graph = retrieveGraph(graphName)
-        if(graph == null) {
+        if (graph == null) {
             GriffonApplication app = ApplicationHolder.application
             ConfigObject config = BlueprintsConnector.instance.createConfig(app)
             graph = BlueprintsConnector.instance.connect(app, config, graphName)
         }
         
-        if(graph == null) {
+        if (graph == null) {
             throw new IllegalArgumentException("No such Graph configuration for name $graphName")
         }
         graph
