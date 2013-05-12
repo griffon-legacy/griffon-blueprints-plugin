@@ -32,6 +32,8 @@ public class DefaultBlueprintsProvider extends AbstractBlueprintsProvider {
         return INSTANCE;
     }
 
+    private DefaultBlueprintsProvider() {}
+
     @Override
     protected Graph getGraph(String graphName) {
         return GraphHolder.getInstance().fetchGraph(graphName);

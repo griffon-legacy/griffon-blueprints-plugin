@@ -39,6 +39,8 @@ class GraphHolder {
         INSTANCE
     }
 
+    private GraphHolder() {}
+
     String[] getGraphNames() {
         List<String> graphNames = new ArrayList<String>()
         graphNames.addAll(graphs.keySet())

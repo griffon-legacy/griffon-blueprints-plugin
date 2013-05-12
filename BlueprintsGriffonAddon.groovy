@@ -25,10 +25,7 @@ import static griffon.util.ConfigUtils.getConfigValueAsBoolean
  */
 class BlueprintsGriffonAddon {
     void addonPostInit(GriffonApplication app) {
-        ConfigObject config = BlueprintsConnector.instance.createConfig(app)
-        if (getConfigValueAsBoolean(app.config, 'griffon.blueprints.connect.onstartup', true)) {
-            BlueprintsConnector.instance.connect(app, config)
-        }
+        BlueprintsConnector.instance.createConfig(app)
         def types = app.config.griffon?.blueprints?.injectInto ?: ['controller']
         for (String type : types) {
             for (GriffonClass gc : app.artifactManager.getClassesOfType(type)) {
@@ -39,6 +36,12 @@ class BlueprintsGriffonAddon {
     }
 
     Map events = [
+        LoadAddonsEnd: { app, addons ->
+            if (getConfigValueAsBoolean(app.config, 'griffon.blueprints.connect.onstartup', true)) {
+                ConfigObject config = BlueprintsConnector.instance.createConfig(app)
+                BlueprintsConnector.instance.connect(app, config)
+            }
+        },
         ShutdownStart: { app ->
             ConfigObject config = BlueprintsConnector.instance.createConfig(app)
             BlueprintsConnector.instance.disconnect(app, config)
